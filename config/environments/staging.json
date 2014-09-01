@@ -1,0 +1,7 @@
+{
+    "bookViewerUrl"	: "http://jhb.gummii.co.uk",
+    "bookSearchUrl"	: "http://search.jhb.gummii.co.uk",
+    "mediaPath"		: "/media",
+    "elasticPath"	: "/elasticsearch2",
+    "logLevel"		: "all"
+}

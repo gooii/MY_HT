@@ -1,0 +1,24 @@
+{
+  "name": "my_ht",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2.0",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "jquery": "~2.1",
+    "angular-resource": null,
+    "angular-cookies": null,
+    "angular-sanitize": null,
+    "angular-route": null,
+    "woodman": "~1.1.0",
+    "lodash": "~2.4.1",
+    "angular-rx": "~0.0.3",
+    "angular-gooii": "git@github.com:gooii/angular-gooii#master",
+    "sizzle": "1.10.18",
+    "angular-google-analytics": "Normalised/angular-google-analytics#master"
+  },
+  "devDependencies": {
+    "angular-mocks": null,
+    "angular-scenario": null
+  }
+}

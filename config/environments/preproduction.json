@@ -1,0 +1,7 @@
+{
+    "bookViewerUrl"	: "https://data.historicaltexts.jisc.ac.uk:8443",
+    "bookSearchUrl"	: "https://historicaltexts.jisc.ac.uk:8443",
+    "mediaPath"		: "/media",
+    "elasticPath"	: "/elasticsearch2",
+    "logLevel"		: "all"
+}
