@@ -20,4 +20,4 @@ app = angular.module 'myht'
 
 # create an instance
 #
-app.factory 'ApplicationModel', ApplicationModelFactory
+app.factory 'myht.ApplicationModel', ApplicationModelFactory

@@ -85,4 +85,4 @@ class HomeController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'HomeCtrl', HomeController
+app.controller 'myht.HomeCtrl', HomeController

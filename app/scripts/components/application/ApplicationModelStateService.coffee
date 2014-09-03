@@ -4,7 +4,7 @@ class ApplicationModelStateService
   @cookieId: 'myht.state'
 
   # Configure dependency injection
-  @$inject: ['$window', '$http', '$q', '$cookieStore', 'LoggerService', 'ApplicationModel']
+  @$inject: ['$window', '$http', '$q', '$cookieStore', 'LoggerService', 'myht.ApplicationModel']
 
   constructor: (@$window, @$http, @$q, @$cookieStore, jisc$logger, @ApplicationModel) ->
     # initialise logger
@@ -69,4 +69,4 @@ class ApplicationModelStateService
 
 app = angular.module 'myht'
 
-app.service 'ApplicationModelStateService', ApplicationModelStateService
+app.service 'myht.ApplicationModelStateService', ApplicationModelStateService

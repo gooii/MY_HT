@@ -1,9 +1,9 @@
-# Root controller for Search app.
+# Root controller for Search app - Possibly inject UserProfile service here?
 #
 class AppController
   # Configure dependency injection
   #
-  @$inject: ['$rootScope', '$scope', 'rx', 'ApplicationModelStateService', 'LoggerService']
+  @$inject: ['$rootScope', '$scope', 'rx', 'myht.ApplicationModelStateService', 'LoggerService']
 
   constructor: ($rootScope, $scope, rx, myht$appModelState, logFactory) ->
     @_$rootScope          = $rootScope
@@ -11,6 +11,9 @@ class AppController
     @_rx                  = rx
     @_myht$appModelState  = myht$appModelState
     @_observables         = {}
+    @_userProfile         =
+      avatar: "images/test/avatars/sunny.png"
+      name  : "John Doe"
 
     # initialise logger
     #
@@ -102,14 +105,20 @@ class AppController
   # Public functions                                                          #
   #############################################################################
 
-  # getter allowing access to the Rx Observables specific to this controller
-  #
   observables: () =>
     return @_observables
+
+  userProfile: (userProfile) =>
+    # assign the new user profile if one is provided
+    #
+    @_userProfile = angular.copy userProfile if angular.isDefined userProfile
+    # return the private userProfile instance
+    #
+    return @_userProfile
 
 # grab a reference to our main module
 #
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'AppCtrl', AppController
+app.controller 'myht.AppCtrl', AppController

@@ -8,7 +8,9 @@ module.exports = {
             dest: 'dist',
             src: [
                 '*.html',
-                'images/{,*/}/**/*.*'
+                'images/{,*/}/**/*.*',
+                'smart_components/fonts/*.*',
+                'smart_components/img/**/*.*'
             ]
         }]
     },

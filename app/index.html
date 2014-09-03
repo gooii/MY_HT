@@ -3,71 +3,124 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My Historical Texts</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+	<head>
+	    <title>My Historical Texts</title>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- Google Fonts -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:400,600,700">
+		<!--
+		Specifying a Webpage Icon for Web Clip, ref:-
+			https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+		-->
+		<link rel="apple-touch-icon"                 href="smart_components/img/splash/sptouch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76"   href="smart_components/img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="smart_components/img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="smart_components/img/splash/touch-icon-ipad-retina.png">
 
-    <!-- build:css(.tmp) styles/style.css -->
-    <link rel="stylesheet" href="styles/style.css">
-    <!-- endbuild -->
-  </head>
-  <body data-ng-app="myht">
-    <!--[if lt IE 10]>
-	<p class="browsehappy">
-	  Historical Texts is not compatible with this browser version. Please <a href="http://browsehappy.com/">upgrade your browser</a> version or use an alternative browser
-	</p>
-    <![endif]-->
+		<!-- Startup image for web apps -->
+		<link rel="apple-touch-startup-image" href="smart_components/img/splash/ipad-landscape.png"  media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="smart_components/img/splash/ipad-portrait.png"   media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="smart_components/img/splash/iphone.png"          media="screen and (max-device-width: 320px)">
 
-    <!-- Add your site or application content here -->
-    <div data-ng-controller="AppCtrl as app">
-	    <div data-ng-view></div>
-    </div>
+		<!-- build:smartcss(app) smart_components/styles/smart-style.css -->
+		<link rel="stylesheet" type="text/css" media="screen" href="smart_components/styles/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="smart_components/styles/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="smart_components/styles/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="smart_components/styles/smartadmin-skins.min.css">
+		<!-- endbuild -->
 
-    <!-- Google JS API access -->
-    <script src="https://apis.google.com/js/client.js"></script>
+		<!-- build:css(.tmp) styles/style.css -->
+	    <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css">
+	    <!-- endbuild -->
+	</head>
+    <body class="" data-ng-app="myht" data-ng-controller="myht.AppCtrl as app">
+        <!--
+        POSSIBLE CLASSES: minified, fixed-ribbon, fixed-header, fixed-width, top-menu
+		You can also add different skin classes such as "smart-skin-0", "smart-skin-1" etc...
+		-->
+		<!--[if lt IE 10]>
+		<p class="browsehappy">
+		  Historical Texts is not compatible with this browser version. Please <a href="http://browsehappy.com/">upgrade your browser</a> version or use an alternative browser
+		</p>
+		<![endif]-->
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+        <!-- Main layout: Start -->
+        <!-- Main Header -->
+        <header data-ng-controller="myht.HeaderCtrl as header" id="header" data-ng-include="'/partials/components/header.html'"></header>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/woodman/dist/woodman-browser.js"></script>
-    <script src="bower_components/rxjs/dist/rx.lite.js"></script>
-    <script src="bower_components/rxjs/dist/rx.lite.compat.js"></script>
-    <script src="bower_components/rxjs/dist/rx.experimental.js"></script>
-    <script src="bower_components/angular-rx/dist/rx.angular.js"></script>
-    <script src="bower_components/angular-google-analytics/src/angular-google-analytics.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+        <!-- Left Side Bar -->
+        <aside id="left-panel"><span data-ng-include="'/partials/components/left-panel.html'"></span></aside>
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-	<!-- Main application module -->
-    <script src="scripts/App.js"></script>
-    <script src="scripts/AppController.js"></script>
-    <!-- Gooii -->
-    <script src="scripts/components/gooii/services/LoggerService.js"></script>
-    <script src="scripts/components/gooii/services/TimeoutService.js"></script>
-    <!-- Components - common directives, services, filters, and related files reused elsewhere in the app -->
-    <script src="scripts/components/constants/AppConfig.js"></script>
-    <script src="scripts/components/application/ApplicationModelFactory.js"></script>
-    <script src="scripts/components/application/ApplicationModelStateService.js"></script>
-    <!-- Sub-sections - controllers, and module definitions that represent structural "view" elements or routes within the app -->
-    <script src="scripts/home/HomeController.js"></script>
-    <!-- endbuild -->
-</body>
+        <!-- Main Content - Route Dependant -->
+        <div id="main" role="main">
+	        <div id="ribbon" data-ng-include="'/partials/components/ribbon.html'" data-ribbon=""></div>
+	        <div id="content" data-ng-view="" class="view-animate"></div>
+        </div>
+
+        <!-- Main Footer -->
+        <div class="page-footer"><span data-ng-include="'/partials/components/footer.html'"></span></div>
+
+        <!-- Shortcut? -->
+        <div id="shortcut"><span data-ng-include="'/partials/components/shortcut.html'"></span></div>
+        <!-- Main layout: End -->
+
+        <!-- Google JS API access -->
+		<script src="https://apis.google.com/js/client.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="bower_components/es5-shim/es5-shim.js"></script>
+		<script src="bower_components/json3/lib/json3.min.js"></script>
+		<![endif]-->
+
+		<!-- build:js scripts/vendor.js -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.js"></script>
+		<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+		<script src="bower_components/woodman/dist/woodman-browser.js"></script>
+		<script src="bower_components/rxjs/dist/rx.lite.js"></script>
+		<script src="bower_components/rxjs/dist/rx.lite.compat.js"></script>
+		<script src="bower_components/rxjs/dist/rx.experimental.js"></script>
+		<script src="bower_components/angular-rx/dist/rx.angular.js"></script>
+		<script src="bower_components/angular-google-analytics/src/angular-google-analytics.js"></script>
+		<!-- endbuild -->
+
+		<!-- build:js smart_components/lib/smartadmin.min.js -->
+        <script src="smart_components/js/lib/smart-admin.js"></script>
+		<!-- endbuild -->
+
+        <!-- build:js smart_components/lib/bootstrap.min.js -->
+        <script src="smart_components/js/lib/ui-bootstrap-custom-tpls-0.11.0.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:smartjs smart_components/lib/smartadmin-plugins.min.js -->
+        <script src="smart_components/js/notification/smart-notification.min.js"></script>
+        <script src="smart_components/js/smartwidgets/jarvis.widget.min.js"></script>
+        <script src="smart_components/js/bootstrap/bootstrap.min.js"></script>
+        <script src="smart_components/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp}) scripts/myht.min.js -->
+        <!-- Main Application and Controller scripts -->
+		<script src="scripts/App.js"></script>
+		<script src="scripts/AppController.js"></script>
+		<script src="scripts/components/gooii/services/LoggerService.js"></script>
+		<script src="scripts/components/gooii/services/TimeoutService.js"></script>
+		<script src="scripts/components/constants/AppConfig.js"></script>
+		<script src="scripts/components/application/ApplicationModelFactory.js"></script>
+		<script src="scripts/components/application/ApplicationModelStateService.js"></script>
+        <script src="scripts/components/activities/ActivityController.js"></script>
+        <script src="scripts/components/header/HeaderController.js"></script>
+		<!-- Anything that represents a specific route within the App -->
+        <script src="scripts/home/HomeController.js"></script>
+		<!-- endbuild -->
+	</body>
 </html>

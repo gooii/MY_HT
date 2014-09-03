@@ -10,11 +10,11 @@ angular.module('gooii', [])
 # application wide dependencies
 #
 app = angular.module('myht', [
-  'gooii'
   'ngCookies'
   'ngResource'
   'ngSanitize'
   'ngRoute'
+  'ui.bootstrap'
   'angular-google-analytics'
   'rx'
   'gooii'
@@ -31,13 +31,11 @@ app.config ($routeProvider, $locationProvider) ->
   # configure routes
   #
   $routeProvider
-    .when('/home', { templateUrl: '/partials/home/home.html', controller: 'HomeCtrl', controllerAs: 'home', reloadOnSearch: false })
-
-  # redirect to /home if an unrecognised route is entered for the time being
-  #
-  $routeProvider.otherwise
-    redirectTo: () ->
-      '/home'
+  .when('/home' , { templateUrl   : (()             -> return "partials/home/home.html")            , reloadOnSearch: false })
+  .when('/:page', { templateUrl   : (($routeParams) -> return "partials/#{$routeParams.page}.html") , reloadOnSearch: false })
+  .otherwise({
+    redirectTo: '/home'
+  })
 
 # configure services at runtime; here's also a good place to put some
 # convenience stuff on $rootScope if need be
