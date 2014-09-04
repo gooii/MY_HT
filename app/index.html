@@ -38,7 +38,7 @@
 	    <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css">
 	    <!-- endbuild -->
 	</head>
-    <body class="" data-ng-app="myht" data-ng-controller="myht.AppCtrl as app">
+    <body data-myht-body data-ng-app="myht" class="" data-ng-controller="myhtAppCtrl as app" data-ng-class="{ 'minified' : app.state().ui.sideMenu.isMinified, 'hidden-menu' : app.state().ui.sideMenu.isHidden }">
         <!--
         POSSIBLE CLASSES: minified, fixed-ribbon, fixed-header, fixed-width, top-menu
 		You can also add different skin classes such as "smart-skin-0", "smart-skin-1" etc...
@@ -51,22 +51,24 @@
 
         <!-- Main layout: Start -->
         <!-- Main Header -->
-        <header data-ng-controller="myht.HeaderCtrl as header" id="header" data-ng-include="'/partials/components/header.html'"></header>
+        <myht-header data-ng-controller="myhtHeaderCtrl as header" id="header"></myht-header>
 
         <!-- Left Side Bar -->
-        <aside id="left-panel"><span data-ng-include="'/partials/components/left-panel.html'"></span></aside>
+        <aside id="left-panel"><span data-ng-include="'/partials/components/myht-left-panel.html'"></span></aside>
 
         <!-- Main Content - Route Dependant -->
         <div id="main" role="main">
-	        <div id="ribbon" data-ng-include="'/partials/components/ribbon.html'" data-ribbon=""></div>
+	        <!-- Navigation ribbon including breadcrumb trail -->
+	        <div id="myht-ribbon"></div>
+	        <!-- Main content -->
 	        <div id="content" data-ng-view="" class="view-animate"></div>
         </div>
 
         <!-- Main Footer -->
-        <div class="page-footer"><span data-ng-include="'/partials/components/footer.html'"></span></div>
+        <div class="page-footer"><span data-ng-include="'/partials/components/myht-footer.html'"></span></div>
 
         <!-- Shortcut? -->
-        <div id="shortcut"><span data-ng-include="'/partials/components/shortcut.html'"></span></div>
+        <div id="shortcut"><span data-ng-include="'/partials/components/myht-shortcut.html'"></span></div>
         <!-- Main layout: End -->
 
         <!-- Google JS API access -->
@@ -93,17 +95,13 @@
 		<script src="bower_components/angular-google-analytics/src/angular-google-analytics.js"></script>
 		<!-- endbuild -->
 
-		<!-- build:js smart_components/lib/smartadmin.min.js -->
-        <script src="smart_components/js/lib/smart-admin.js"></script>
-		<!-- endbuild -->
-
         <!-- build:js smart_components/lib/bootstrap.min.js -->
         <script src="smart_components/js/lib/ui-bootstrap-custom-tpls-0.11.0.js"></script>
         <!-- endbuild -->
 
         <!-- build:smartjs smart_components/lib/smartadmin-plugins.min.js -->
-        <script src="smart_components/js/notification/smart-notification.min.js"></script>
         <script src="smart_components/js/smartwidgets/jarvis.widget.min.js"></script>
+        <script src="smart_components/js/plugin/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="smart_components/js/bootstrap/bootstrap.min.js"></script>
         <script src="smart_components/js/plugin/sparkline/jquery.sparkline.min.js"></script>
         <!-- endbuild -->
@@ -117,8 +115,18 @@
 		<script src="scripts/components/constants/AppConfig.js"></script>
 		<script src="scripts/components/application/ApplicationModelFactory.js"></script>
 		<script src="scripts/components/application/ApplicationModelStateService.js"></script>
-        <script src="scripts/components/activities/ActivityController.js"></script>
+        <script src="scripts/components/notifications/NotificationController.js"></script>
         <script src="scripts/components/header/HeaderController.js"></script>
+        <script src="scripts/components/header/HeaderDirective.js"></script>
+        <script src="scripts/components/dom/BodyDirective.js"></script>
+        <script src="scripts/components/navigation/NavigationDirective.js"></script>
+        <script src="scripts/components/navigation/NavGroupController.js"></script>
+        <script src="scripts/components/navigation/NavGroupDirective.js"></script>
+        <script src="scripts/components/navigation/NavItemController.js"></script>
+        <script src="scripts/components/navigation/NavItemDirective.js"></script>
+        <script src="scripts/components/ribbon/RibbonDirective.js"></script>
+        <script src="scripts/components/ribbon/RibbonService.js"></script>
+        <script src="scripts/components/breadcrumb/BreadcrumbDirective.js"></script>
 		<!-- Anything that represents a specific route within the App -->
         <script src="scripts/home/HomeController.js"></script>
 		<!-- endbuild -->

@@ -1,8 +1,6 @@
-# Activity Controller: temporary idea for a controller that can
-# provide a summary of activities/notifications inside the main
-# Header bar prompting the user to reveal more information
+# Controller for a <nav:group ...> Element
 #
-class ActivityController
+class NavGroupController
   # Configure dependency injection
   #
   @$inject: ['$rootScope', '$scope', 'rx', 'LoggerService']
@@ -15,7 +13,7 @@ class ActivityController
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.Activity')
+    @_log = logFactory.getLogger('controller.myhtNavGroup')
     @_log.info "Created"
 
     # initialise controller
@@ -30,7 +28,6 @@ class ActivityController
   # initialise any publicly accessible properties
   #
   _initProps: ->
-
     # done: _initProps
     #
     return
@@ -38,6 +35,9 @@ class ActivityController
   # initialise any application specific $scope'd stuff
   #
   _initScope: ->
+    @_$scope.active         = false
+    @_$scope.hasIcon        = angular.isDefined(@_$scope.icon)
+    @_$scope.hasIconCaption = angular.isDefined(@_$scope.iconCaption)
 
     # done: _initScope
     #
@@ -62,14 +62,11 @@ class ActivityController
   # Public functions                                                          #
   #############################################################################
 
-  # getter allowing access to the Rx Observables specific to this controller
-  #
-  observables: () =>
-    return @_observables
+  setActive: (active) => @_$scope.active = active
 
 # grab a reference to our main module
 #
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myht.ActivityCtrl', ActivityController
+app.controller 'myhtNavGroupCtrl', NavGroupController

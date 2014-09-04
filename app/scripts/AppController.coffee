@@ -3,7 +3,7 @@
 class AppController
   # Configure dependency injection
   #
-  @$inject: ['$rootScope', '$scope', 'rx', 'myht.ApplicationModelStateService', 'LoggerService']
+  @$inject: ['$rootScope', '$scope', 'rx', 'myhtApplicationModelStateService', 'LoggerService']
 
   constructor: ($rootScope, $scope, rx, myht$appModelState, logFactory) ->
     @_$rootScope          = $rootScope
@@ -11,6 +11,7 @@ class AppController
     @_rx                  = rx
     @_myht$appModelState  = myht$appModelState
     @_observables         = {}
+    @_state               = @_myht$appModelState.retrieve()
     @_userProfile         =
       avatar: "images/test/avatars/sunny.png"
       name  : "John Doe"
@@ -33,9 +34,6 @@ class AppController
   # initialise any publicly accessible properties
   #
   _initProps: ->
-    # get and start monitoring last known application state
-    #
-    @state = @_myht$appModelState.retrieve()
 
   # initialise any application specific $scope'd stuff
   #
@@ -76,7 +74,7 @@ class AppController
       # Observers onNext method, final parameter states whether to perform
       # a deep watch on the object returned by the first parameter
       #
-      @_$scope.$watch("app.state", ((newValue, oldValue) => observer.onNext({newValue: newValue, oldValue: oldValue})), true)
+      @_$scope.$watch( (() => return @state()), ((newValue, oldValue) => observer.onNext({newValue: newValue, oldValue: oldValue})), true)
       # done
       #
       return
@@ -89,10 +87,9 @@ class AppController
       #
       return data.newValue
     .subscribe (model) =>
-      @_log.info "Persisting state model: %o", model
       # persist the new application model
       #
-      @_jht$appModelState.persist model
+      @_myht$appModelState.persist model
       # done: .subscribe
       #
       return
@@ -116,9 +113,35 @@ class AppController
     #
     return @_userProfile
 
+  state: (state) =>
+    # assign the new user profile if one is provided
+    #
+    @_state = angular.copy state if angular.isDefined state
+    # return the private userProfile instance
+    #
+    return @_state
+
+  # toggle side menu visibility
+  #
+  toggleSideMenuHidden: () =>
+    # toggle state
+    #
+    @state().ui.sideMenu.isHidden = !@state().ui.sideMenu.isHidden
+    # done: toggleSideMenu
+    #
+    return
+
+  toggleSideMenuMinified: () =>
+    # toggle state
+    #
+    @state().ui.sideMenu.isMinified = !@state().ui.sideMenu.isMinified
+    # done: toggleSideMenu
+    #
+    return
+
 # grab a reference to our main module
 #
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myht.AppCtrl', AppController
+app.controller 'myhtAppCtrl', AppController

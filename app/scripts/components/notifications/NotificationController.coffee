@@ -1,6 +1,8 @@
-# Application main Header controller
+# Notification Controller: temporary idea for a controller that
+# can provide a summary of activities/notifications, inside the
+# main Header bar prompting the user to reveal more information
 #
-class HeaderController
+class NotificationController
   # Configure dependency injection
   #
   @$inject: ['$rootScope', '$scope', 'rx', 'LoggerService']
@@ -13,7 +15,7 @@ class HeaderController
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.myhtHeader')
+    @_log = logFactory.getLogger('controller.myhtNotification')
     @_log.info "Created"
 
     # initialise controller
@@ -28,6 +30,7 @@ class HeaderController
   # initialise any publicly accessible properties
   #
   _initProps: ->
+
     # done: _initProps
     #
     return
@@ -69,4 +72,4 @@ class HeaderController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtHeaderCtrl', HeaderController
+app.controller 'myhtNotificationCtrl', NotificationController

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 # declare module for angular-gooii, into which
 # the relevant resources get loaded; the files
@@ -31,8 +31,8 @@ app.config ($routeProvider, $locationProvider) ->
   # configure routes
   #
   $routeProvider
-  .when('/home' , { templateUrl   : (()             -> return "partials/home/home.html")            , reloadOnSearch: false })
-  .when('/:page', { templateUrl   : (($routeParams) -> return "partials/#{$routeParams.page}.html") , reloadOnSearch: false })
+  .when('/home'           , { templateUrl   : (()             -> return "/partials/home/myht-home.html")                                     , reloadOnSearch: false })
+  .when('/:section/:page' , { templateUrl   : (($routeParams) -> return "/partials/#{$routeParams.section}/myht-#{$routeParams.page}.html")  , reloadOnSearch: false })
   .otherwise({
     redirectTo: '/home'
   })

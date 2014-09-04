@@ -12,7 +12,7 @@ class HomeController
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.Home')
+    @_log = logFactory.getLogger('controller.myhtHome')
     @_log.info "Created"
 
     # initialise controller
@@ -85,4 +85,4 @@ class HomeController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myht.HomeCtrl', HomeController
+app.controller 'myhtHomeCtrl', HomeController

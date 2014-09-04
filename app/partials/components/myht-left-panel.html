@@ -1,0 +1,41 @@
+<!-- User info -->
+<div class="login-info">
+	<span>
+		<!-- User image size is adjusted inside CSS, it should stay as is -->
+		<a data-ng-href="" id="show-shortcut">
+			<img data-ng-src="{{app.userProfile().avatar}}" alt="me" class="online" />
+			<span data-localize="{{app.userProfile().name}}">
+				{{app.userProfile().name}}
+			</span>
+			<i class="fa fa-angle-down"></i>
+		</a>
+	</span>
+</div>
+<!-- end user info -->
+
+<!--
+NAVIGATION: This navigation is also responsive. To make this navigation
+dynamic please make sure to link the node (the reference to the nav>ul)
+after page load. Or the navigation will not initialize.
+-->
+<navigation>
+	<nav:item data-view="/home" data-icon="fa fa-lg fa-fw fa-home" title="Home" />
+	<nav:group data-icon="fa fa-lg fa-fw fa-book" title="Library" >
+		<nav:item data-view="/library/page1" title="Test 1" />
+		<nav:item data-view="/library/page2" title="Test 2" />
+		<nav:item data-view="/library/page3" title="Test 3" />
+	</nav:group>
+	<nav:group data-icon="fa fa-lg fa-fw fa-list" title="My Lists" >
+		<nav:item data-view="/my-lists/page1" title="Test 1" />
+		<nav:item data-view="/my-lists/page2" title="Test 2" />
+		<nav:item data-view="/my-lists/page3" title="Test 3" />
+	</nav:group>
+	<nav:group data-icon="fa fa-lg fa-fw fa-group" title="My Groups" >
+		<nav:item data-view="/my-groups/page1" title="Test 1" />
+		<nav:item data-view="/my-groups/page2" title="Test 2" />
+		<nav:item data-view="/my-groups/page3" title="Test 3" />
+	</nav:group>
+
+</navigation>
+<!-- Minify (collapses but doesn't hide) left side menu -->
+<span class="minifyme" data-ng-click="app.toggleSideMenuMinified()"> <i class="fa fa-arrow-circle-left hit"></i> </span>

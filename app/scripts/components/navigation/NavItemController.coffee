@@ -1,19 +1,18 @@
-# Application main Header controller
+# Controller for a <nav:item ...> Element
 #
-class HeaderController
+class NavItemController
   # Configure dependency injection
   #
-  @$inject: ['$rootScope', '$scope', 'rx', 'LoggerService']
-
-  constructor: ($rootScope, $scope, rx, logFactory) ->
-    @_$rootScope          = $rootScope
+  @$inject: ['$scope', '$location', 'rx', 'LoggerService']
+  constructor: ($scope, $location, rx, logFactory) ->
     @_$scope              = $scope
+    @_$location           = $location
     @_rx                  = rx
     @_observables         = {}
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.myhtHeader')
+    @_log = logFactory.getLogger('controller.myhtNavItem')
     @_log.info "Created"
 
     # initialise controller
@@ -28,6 +27,11 @@ class HeaderController
   # initialise any publicly accessible properties
   #
   _initProps: ->
+    @isChild        = false
+    @active         = false
+    @hasIcon        = angular.isDefined(@_$scope.icon)
+    @hasIconCaption = angular.isDefined(@_$scope.iconCaption)
+
     # done: _initProps
     #
     return
@@ -59,14 +63,26 @@ class HeaderController
   # Public functions                                                          #
   #############################################################################
 
-  # getter allowing access to the Rx Observables specific to this controller
-  #
-  observables: () =>
-    return @_observables
+  getItemUrl: (view) =>
+    return @_$scope.href if (angular.isDefined(@_$scope.href))
+    return ''            if (!angular.isDefined(view))
+    # default
+    #
+    return view
+
+  getItemTarget: () =>
+    return @_$scope.target if angular.isDefined(@_$scope.target) else '_self'
+
+  isActive: (viewLocation) =>
+    @_$scope.active = viewLocation is @_$location.path()
+    # done: @_$scope.isActive
+    #
+    return
+
 
 # grab a reference to our main module
 #
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtHeaderCtrl', HeaderController
+app.controller 'myhtNavItemCtrl', NavItemController

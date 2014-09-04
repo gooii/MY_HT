@@ -8,4 +8,5 @@ angular.module('myht')
     mediaPath     : '/media'
     elasticPath   : '/elasticsearch2'
     logLevel      : 'all'
-  });
+    menu_speed    : 235
+});

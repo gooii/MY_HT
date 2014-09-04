@@ -4,12 +4,12 @@ class ApplicationModelStateService
   @cookieId: 'myht.state'
 
   # Configure dependency injection
-  @$inject: ['$window', '$http', '$q', '$cookieStore', 'LoggerService', 'myht.ApplicationModel']
-
+  #
+  @$inject: ['$window', '$http', '$q', '$cookieStore', 'LoggerService', 'myhtApplicationModel']
   constructor: (@$window, @$http, @$q, @$cookieStore, jisc$logger, @ApplicationModel) ->
     # initialise logger
     #
-    @log = jisc$logger.getLogger('service.ApplicationModelState')
+    @log = jisc$logger.getLogger('service.myhtApplicationModelState')
     @log.log('create service')
 
   # Retrieves the cookie responsible for storing application state locally rather
@@ -19,7 +19,8 @@ class ApplicationModelStateService
     #
     model = @$cookieStore.get ApplicationModelStateService.cookieId
 
-    # Setup application cookie object; apply defaults if neccessary
+    # setup application cookie object; apply defaults if neccessary
+    #
     if not model
       # create the layout cookie with defaults
       #
@@ -69,4 +70,4 @@ class ApplicationModelStateService
 
 app = angular.module 'myht'
 
-app.service 'myht.ApplicationModelStateService', ApplicationModelStateService
+app.service 'myhtApplicationModelStateService', ApplicationModelStateService

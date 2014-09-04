@@ -4,6 +4,11 @@ class ApplicationModel
   # create instance
   #
   constructor: () ->
+    @ui =
+      sideMenu: {
+        isHidden: false
+        isMinified: false
+      }
 
 class ApplicationModelFactory
   # singleton factory constructor
@@ -20,4 +25,4 @@ app = angular.module 'myht'
 
 # create an instance
 #
-app.factory 'myht.ApplicationModel', ApplicationModelFactory
+app.factory 'myhtApplicationModel', ApplicationModelFactory

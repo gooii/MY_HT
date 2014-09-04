@@ -8,4 +8,5 @@ angular.module('myht')
     mediaPath     : '@@mediaPath'
     elasticPath   : '@@elasticPath'
     logLevel      : '@@logLevel'
-  });
+    menu_speed    : 235
+});
