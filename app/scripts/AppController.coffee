@@ -13,7 +13,7 @@ class AppController
     @_observables         = {}
     @_state               = @_myht$appModelState.retrieve()
     @_userProfile         =
-      avatar: "images/test/avatars/sunny.png"
+      avatar: "/images/test/avatars/sunny.png"
       name  : "John Doe"
 
     # initialise logger
