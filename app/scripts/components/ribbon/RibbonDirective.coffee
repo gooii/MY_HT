@@ -26,11 +26,11 @@ app = angular.module 'myht'
 
 # create an instance
 #
-app.directive 'myhtRibbon', (configuration, $window, $location, $timeout, LoggerService) ->
+app.directive 'ribbon', (appConfig, $window, $location, $timeout, LoggerService) ->
   return {
     restrict    : 'A'
     scope       : { }
     templateUrl : "/partials/components/myht-ribbon.html"
     link        : ($scope, elm, attr) ->
-      new RibbonDirective($scope, elm, attr, configuration, $window, $location, $timeout, LoggerService)
+      new RibbonDirective($scope, elm, attr, appConfig, $window, $location, $timeout, LoggerService)
   }

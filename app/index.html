@@ -38,7 +38,7 @@
 	    <link rel="stylesheet" type="text/css" media="screen" href="/styles/style.css">
 	    <!-- endbuild -->
 	</head>
-    <body data-myht-body data-ng-app="myht" class="" data-ng-controller="myhtAppCtrl as app" data-ng-class="{ 'minified' : app.state().ui.sideMenu.isMinified, 'hidden-menu' : app.state().ui.sideMenu.isHidden }">
+    <body data-ng-app="myht" class="" data-ng-controller="AppCtrl as app" data-ng-class="{ 'minified' : app.state().ui.sideMenu.isMinified, 'hidden-menu' : app.state().ui.sideMenu.isHidden }">
         <!--
         POSSIBLE CLASSES: minified, fixed-ribbon, fixed-header, fixed-width, top-menu
 		You can also add different skin classes such as "smart-skin-0", "smart-skin-1" etc...
@@ -51,15 +51,15 @@
 
         <!-- Main layout: Start -->
         <!-- Main Header -->
-        <myht-header data-ng-controller="myhtHeaderCtrl as header" id="header"></myht-header>
+        <header data-ng-controller="HeaderCtrl as header" id="header"></header>
 
         <!-- Left Side Bar -->
-        <aside id="left-panel"><span data-ng-include="'/partials/components/myht-left-panel.html'"></span></aside>
+        <aside id="left-panel"></aside>
 
         <!-- Main Content - Route Dependant -->
         <div id="main" role="main">
 	        <!-- Navigation ribbon including breadcrumb trail -->
-	        <div id="myht-ribbon"></div>
+	        <div id="ribbon" data-ribbon></div>
 	        <!-- Main content -->
 	        <div id="content" data-ng-view="" class="view-animate"></div>
         </div>
@@ -119,7 +119,9 @@
         <script src="/scripts/components/header/HeaderController.js"></script>
         <script src="/scripts/components/header/HeaderDirective.js"></script>
         <script src="/scripts/components/dom/BodyDirective.js"></script>
-        <script src="/scripts/components/navigation/NavigationDirective.js"></script>
+        <script src="/scripts/components/dom/AsidePanelDirective.js"></script>
+        <script src="/scripts/components/dom/LayoutService.js"></script>
+        <script src="/scripts/components/navigation/NavPanelDirective.js"></script>
         <script src="/scripts/components/navigation/NavGroupController.js"></script>
         <script src="/scripts/components/navigation/NavGroupDirective.js"></script>
         <script src="/scripts/components/navigation/NavItemController.js"></script>
@@ -128,7 +130,7 @@
         <script src="/scripts/components/ribbon/RibbonService.js"></script>
         <script src="/scripts/components/breadcrumb/BreadcrumbDirective.js"></script>
 		<!-- Anything that represents a specific route within the App -->
-        <script src="/scripts/home/HomeController.js"></script>
+        <script src="/scripts/home/DashboardController.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

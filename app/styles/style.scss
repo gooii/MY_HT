@@ -8,6 +8,45 @@
 //
 @import "compass/css3/box-sizing";
 
-.html, .body {
-
+html, body {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
 }
+
+@media screen {
+  #ribbon {
+    min-height: 41px;
+  }
+
+  // Asidepanel styling
+  //
+  #left-panel {
+
+  }
+  #left-panel .nav-panel-wrapper {
+    overflow: hidden;
+    overflow-y: scroll;
+    position: relative;
+  }
+  .minified #left-panel .nav-panel-wrapper {
+    overflow: visible;
+  }
+  .minified #left-panel nav>ul>li>ul.nav-group {
+    max-height: 180px;
+    min-height: 0px;
+    overflow-y: auto;
+  }
+
+  // Main content/view panel
+  //
+  #main {
+    position: absolute;
+    padding-top: 49px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+

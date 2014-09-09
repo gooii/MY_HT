@@ -10,11 +10,9 @@ class NavItemDirective
     @_$location   = $location
     @_$timeout    = $timeout
     @_myht$ribbon = myht$ribbon
-    @_log         = $loggerFactory.getLogger('directive.myhtNavItem')
+    @_log         = $loggerFactory.getLogger('directive.navItem')
 
     @init()
-
-    @_log.info "Created"
 
   init: =>
     @_navCtrl       = @_parentCtrls[0]
@@ -28,7 +26,10 @@ class NavItemDirective
     return
 
   _initScope: () ->
-    @_$scope.openParents    = @_$scope.myhtNavItem.isActive(@_$scope.view)
+    # note that we reference the controller for this directive instance
+    # using the controllerAs property 'ctrl'
+    #
+    @_$scope.openParents    = @_$scope.ctrl.isActive(@_$scope.view)
     @_$scope.isChild        = angular.isDefined(@_navGroupCtrl)
     @_$scope.setBreadcrumb  = () =>
       crumbs = []
@@ -98,12 +99,12 @@ app = angular.module 'myht'
 #
 app.directive 'navItem', (configuration, $window, $location, $timeout, LoggerService, myhtRibbonService) ->
   return {
-    require       : ['^navigation', '^?navGroup'],
+    require       : ['^navPanel', '^?navGroup'],
     restrict      : 'AE',
     transclude    : true,
     replace       : true,
-    controller    : 'myhtNavItemCtrl'
-    controllerAs  : 'myhtNavItem'
+    controller    : 'NavItemCtrl'
+    controllerAs  : 'ctrl'
     scope         : {
       title       : '@',
       view        : '@',
@@ -115,10 +116,10 @@ app.directive 'navItem', (configuration, $window, $location, $timeout, LoggerSer
     link: ($scope, elm, attr, parentCtrls) ->
       new NavItemDirective($scope, elm, attr, parentCtrls, configuration, $window, $location, $timeout, LoggerService, myhtRibbonService)
     template: """
-				<li data-ng-class="{active: myhtNavItem.isActive(view)}">
-					<a data-ng-href="{{ myhtNavItem.getItemUrl(view) }}" title="{{ title }}">
-						<i data-ng-if="myhtNavItem.hasIcon" class="{{ icon }}"><em data-ng-if="myhtNavItem.hasIconCaption"> {{ iconCaption }} </em></i>
-						<span ng-class="{'menu-item-parent': !myhtNavItem.isChild}" data-localize="{{ title }}"> {{ title }} </span>
+				<li data-ng-class="{active: ctrl.isActive(view)}">
+					<a data-ng-href="{{ ctrl.getItemUrl(view) }}" title="{{ title }}">
+						<i data-ng-if="icon" class="{{ icon }}"><em data-ng-if="iconCaption"> {{ iconCaption }} </em></i>
+						<span ng-class="{'menu-item-parent': !ctrl.isChild}" data-localize="{{ title }}"> {{ title }} </span>
 						<span data-ng-transclude=""></span>
 					</a>
 				</li>

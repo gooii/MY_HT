@@ -1,23 +1,27 @@
 class BodyDirective
 
-  constructor: ($scope, elm, attr, configuration, $window, $location, $timeout, $loggerFactory) ->
-    @_$scope    = $scope
-    @_elm       = elm
-    @_attr      = attr
-    @_config    = configuration
-    @_$window   = $window
-    @_$location = $location
-    @_$timeout  = $timeout
-    @_log       = $loggerFactory.getLogger('directive.myhtBody')
+  constructor: ($scope, elm, attr, appConfig, $window, $location, $timeout, $loggerFactory) ->
+    @_$scope      = $scope
+    @_elm         = elm
+    @_attr        = attr
+    @_appConfig   = appConfig
+    @_$window     = $window
+    @_$location   = $location
+    @_$timeout    = $timeout
+    @_log         = $loggerFactory.getLogger('directive.body')
 
     @init()
 
     @_log.info "Created"
 
   init: ->
+    # create 'body' scope
+    #
+    @_$scope.body = {}
+
     # ensure that any empty a tags when clicked prevent the default browser event from occruring
     #
-    @_elm.on('click', 'a[data-ng-href=""]', (e) -> e.preventDefault())
+    @_elm.on('click', 'a[data-ng-href=""], a[data-ng-href="#"]', (e) -> e.preventDefault())
 
     # DETECT MOBILE DEVICES
     #
@@ -33,6 +37,7 @@ class BodyDirective
     else
       # mobile
       @_elm.addClass("mobile-detected")
+
     # done: init
     #
     return
@@ -43,9 +48,9 @@ app = angular.module 'myht'
 
 # create an instance
 #
-app.directive 'myhtBody', (configuration, $window, $location, $timeout, LoggerService) ->
+app.directive 'body', (appConfig, $window, $location, $timeout, LoggerService) ->
   return {
-    restrict: 'A',
+    restrict: 'E'
     link: ($scope, elm, attr) ->
-      new BodyDirective($scope, elm, attr, configuration, $window, $location, $timeout, LoggerService)
+      new BodyDirective($scope, elm, attr, appConfig, $window, $location, $timeout, LoggerService)
     }

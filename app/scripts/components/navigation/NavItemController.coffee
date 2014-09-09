@@ -12,8 +12,7 @@ class NavItemController
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.myhtNavItem')
-    @_log.info "Created"
+    @_log = logFactory.getLogger('controller.NavItem')
 
     # initialise controller
     #
@@ -77,7 +76,7 @@ class NavItemController
     @_$scope.active = viewLocation is @_$location.path()
     # done: @_$scope.isActive
     #
-    return
+    return viewLocation is @_$location.path()
 
 
 # grab a reference to our main module
@@ -85,4 +84,4 @@ class NavItemController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtNavItemCtrl', NavItemController
+app.controller 'NavItemCtrl', NavItemController

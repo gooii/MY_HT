@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myht')
-  .constant('configuration', {
+  .constant('appConfig', {
     appName       : 'My Historical Texts'
     bookViewerUrl : '@@bookViewerUrl'
     bookSearchUrl : '@@bookSearchUrl'

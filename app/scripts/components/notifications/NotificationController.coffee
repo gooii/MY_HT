@@ -72,4 +72,4 @@ class NotificationController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtNotificationCtrl', NotificationController
+app.controller 'NotificationCtrl', NotificationController

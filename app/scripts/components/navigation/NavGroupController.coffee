@@ -13,7 +13,7 @@ class NavGroupController
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.myhtNavGroup')
+    @_log = logFactory.getLogger('controller.NavGroup')
     @_log.info "Created"
 
     # initialise controller
@@ -69,4 +69,4 @@ class NavGroupController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtNavGroupCtrl', NavGroupController
+app.controller 'NavGroupCtrl', NavGroupController

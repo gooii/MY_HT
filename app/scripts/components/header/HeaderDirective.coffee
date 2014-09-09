@@ -25,7 +25,7 @@ app = angular.module 'myht'
 
 # create an instance
 #
-app.directive 'myhtHeader', (configuration, $window, $location, $timeout, LoggerService) ->
+app.directive 'header', (configuration, $window, $location, $timeout, LoggerService) ->
   return {
     restrict: 'E',
     templateUrl: '/partials/components/myht-header.html'

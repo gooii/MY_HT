@@ -69,4 +69,4 @@ class HeaderController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtHeaderCtrl', HeaderController
+app.controller 'HeaderCtrl', HeaderController

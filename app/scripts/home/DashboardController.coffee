@@ -1,6 +1,6 @@
 # Root controller for Home section of the App.
 #
-class HomeController
+class DashboardController
   # Configure dependency injection
   #
   @$inject: ['$rootScope', '$scope', 'rx', 'LoggerService']
@@ -12,7 +12,7 @@ class HomeController
 
     # initialise logger
     #
-    @_log = logFactory.getLogger('controller.myhtHome')
+    @_log = logFactory.getLogger('controller.DashboardCtrl')
     @_log.info "Created"
 
     # initialise controller
@@ -43,22 +43,6 @@ class HomeController
   # create observables
   #
   _initEvent: () ->
-    # route update events
-    #
-    @_observables.routeUpdate = @_rx.Observable.create (observer) =>
-      @_$rootScope.$on '$routeUpdate', () => observer.onNext()
-      # done: @rx.Observable.create
-      #
-      return
-
-    # route change events
-    #
-    @_observables.routeChange = @_rx.Observable.create (observer) =>
-      @_$rootScope.$on '$routeChangeSuccess', () => observer.onNext()
-      # done: @rx.Observable.create
-      #
-      return
-
     # done: _initEvent
     #
     return
@@ -85,4 +69,4 @@ class HomeController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtHomeCtrl', HomeController
+app.controller 'DashboardCtrl', DashboardController

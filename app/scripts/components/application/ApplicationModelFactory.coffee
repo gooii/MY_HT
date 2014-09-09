@@ -6,7 +6,7 @@ class ApplicationModel
   constructor: () ->
     @ui =
       sideMenu: {
-        isHidden: false
+        isHidden  : false
         isMinified: false
       }
 

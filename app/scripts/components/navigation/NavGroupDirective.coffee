@@ -15,7 +15,6 @@ class NavGroupDirective
     @_log.info "Created"
 
   init: =>
-
     # done: init
     #
     return
@@ -29,14 +28,14 @@ app = angular.module 'myht'
 app.directive 'navGroup', (configuration, $window, $location, $timeout, LoggerService) ->
   return {
     restrict  : 'AE',
-    controller: 'myhtNavGroupCtrl',
+    controller: 'NavGroupCtrl',
     transclude: true,
     replace   : true,
     scope     : {
       icon        : '@'
       title       : '@'
       iconCaption : '@'
-      active      : '=?'
+      active      : '=?' # not seen this binding before ... two-way optional?
     }
     link : ($scope, elm, attr) ->
       new NavGroupDirective($scope, elm, attr, configuration, $window, $location, $timeout, LoggerService)
@@ -46,7 +45,7 @@ app.directive 'navGroup', (configuration, $window, $location, $timeout, LoggerSe
           <i data-ng-if="hasIcon" class="{{ icon }}"><em data-ng-if="hasIconCaption"> {{ iconCaption }} </em></i>
           <span class="menu-item-parent" data-localize="{{ title }}">{{ title }}</span>
         </a>
-        <ul data-ng-transclude=""></ul>
+        <ul data-ng-transclude="" class="nav-group"></ul>
       </li>
     """
   }

@@ -3,15 +3,16 @@
 class AppController
   # Configure dependency injection
   #
-  @$inject: ['$rootScope', '$scope', 'rx', 'myhtApplicationModelStateService', 'LoggerService']
+  @$inject: ['$rootScope', '$scope', 'rx', 'myhtApplicationModelStateService', 'LoggerService', '$window']
 
-  constructor: ($rootScope, $scope, rx, myht$appModelState, logFactory) ->
+  constructor: ($rootScope, $scope, rx, myht$appModel, logFactory, $window) ->
     @_$rootScope          = $rootScope
     @_$scope              = $scope
+    @_$window             = $window
     @_rx                  = rx
-    @_myht$appModelState  = myht$appModelState
+    @_myht$appModel       = myht$appModel
     @_observables         = {}
-    @_state               = @_myht$appModelState.retrieve()
+    @_state               = @_myht$appModel.retrieve()
     @_userProfile         =
       avatar: "/images/test/avatars/sunny.png"
       name  : "John Doe"
@@ -60,6 +61,31 @@ class AppController
       #
       return
 
+    # window resize (height) events
+    #
+    @_observables.windowSize = @_rx.Observable.create (observer) =>
+      # invoke observer's onNext method each time the window dimensions are changed
+      #
+      $(@_$window).resize () => observer.onNext($(@_$window))
+    # start with the current window
+    #
+    .startWith($(@_$window))
+    # map the current window to an object containing inner height and width
+    #
+    .map ($window) ->
+      return {
+        innerHeight: $window.innerHeight(),
+        innerWidth : $window.innerWidth()
+      }
+    # throttle events
+    #
+    .throttle(1000)
+    # share a single subscription
+    #
+    .share()
+
+    # done: _initEvent
+    #
     return
 
   # subscribe to observables
@@ -89,7 +115,7 @@ class AppController
     .subscribe (model) =>
       # persist the new application model
       #
-      @_myht$appModelState.persist model
+      @_myht$appModel.persist model
       # done: .subscribe
       #
       return
@@ -144,4 +170,4 @@ class AppController
 app = angular.module 'myht'
 
 # Create an instance
-app.controller 'myhtAppCtrl', AppController
+app.controller 'AppCtrl', AppController

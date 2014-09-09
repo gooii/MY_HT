@@ -1,14 +1,9 @@
 class RibbonService
-  # Static property for retrieval and storeage of layout cookie
-  #
-  @cookieId: 'myht.state'
-
   # Configure dependency injection
   #
-  @$inject: ['$rootScope', 'rx', 'LoggerService']
-  constructor: ($rootScope, rx, jisc$logger) ->
-    @_$rootScope  = $rootScope
-    @_rx          = rx
+  @$inject: ['LoggerService', '$timeout']
+  constructor: (jisc$logger, $timeout) ->
+    @_$timeout    = $timeout
     # initialise logger
     #
     @_logger = jisc$logger.getLogger('service.RibbonService')
@@ -16,7 +11,6 @@ class RibbonService
     # init public properties
     #
     @currentBreadcrumb  = []
-    @navItemObservable  = null
     # initialise
     #
     @_init()
@@ -25,17 +19,6 @@ class RibbonService
   # breadcrumb reference changes
   #
   _init: () ->
-    @navItemObservable = @_rx.Observable.create (observer) =>
-      @_$rootScope.$watch( (() -> return @currentBreadcrumb), ((newVal, oldVal) -> observer.onNext({newVal: newVal, oldVal: oldVal})), false )
-    .filter (data) ->
-      return data.newValue isnt data.oldValue
-    .map (data) ->
-      return data.newValue
-    # share a single subscription rather than creating one subscription (stream) per
-    # observer
-    #
-    .share()
-
     # done: _init
     #
     return
@@ -51,7 +34,11 @@ class RibbonService
     breadcrumb = crumbs.reverse()
     # refresh internal ref
     #
-    @currentBreadcrumb = breadcrumb
+    @_$timeout () =>
+      angular.copy breadcrumb, @currentBreadcrumb
+      # done: @_$timeout
+      #
+      return
     # done: updateBreadcrumb
     #
     return
